@@ -1,0 +1,19 @@
+﻿{
+  "faq": [
+    {"id": 1, "question": "What is machine learning?", "answer": "Machine learning is a field of AI that enables systems to learn from data without explicit programming."},
+    {"id": 2, "question": "What is deep learning?", "answer": "Deep learning uses neural networks with many layers to learn complex patterns from large amounts of data."},
+    {"id": 3, "question": "What is supervised learning?", "answer": "Supervised learning trains models on labeled data to make predictions on unseen examples."},
+    {"id": 4, "question": "What is unsupervised learning?", "answer": "Unsupervised learning finds hidden patterns in unlabeled data, such as clustering or dimensionality reduction."},
+    {"id": 5, "question": "What is reinforcement learning?", "answer": "Reinforcement learning trains agents to make decisions by rewarding desired actions and penalizing undesired ones."},
+    {"id": 6, "question": "What are embeddings?", "answer": "Embeddings are numerical vector representations of text, images, or other data that capture semantic meaning."},
+    {"id": 7, "question": "What is semantic search?", "answer": "Semantic search finds results based on meaning rather than just keyword matching."},
+    {"id": 8, "question": "What is vector database?", "answer": "A vector database stores and searches high-dimensional vectors efficiently for similarity search."},
+    {"id": 9, "question": "What is ChromaDB?", "answer": "ChromaDB is an open-source embedding database designed for building AI applications with vector search."},
+    {"id": 10, "question": "What is cosine similarity?", "answer": "Cosine similarity measures the angle between two vectors to determine how similar they are in direction."},
+    {"id": 11, "question": "", "answer": "Empty question test"},
+    {"id": 12, "question": "What is NLP?", "answer": ""},
+    {"id": 13, "question": "What is NLP?", "answer": "Natural Language Processing is a branch of AI that helps computers understand human language."},
+    {"id": 14, "question": "WHAT IS TRANSFER LEARNING?", "answer": "TRANSFER LEARNING USES A PRE-TRAINED MODEL ON A NEW TASK WITH LESS DATA."},
+    {"id": 15, "question": "   What is overfitting?   ", "answer": "   Overfitting occurs when a model learns training data too well and fails to generalize.   "}
+  ]
+}

@@ -1,0 +1,6 @@
+﻿pandas==2.1.4
+numpy==1.26.2
+jupyter==1.0.0
+ipykernel==6.27.1
+chromadb==0.4.18
+sentence-transformers==2.2.2

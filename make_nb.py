@@ -1,0 +1,36 @@
+﻿import json
+from pathlib import Path
+
+nb = {
+ 'cells': [],
+ 'metadata': {'kernelspec': {'display_name': 'Python 3', 'language': 'python', 'name': 'python3'}, 'language_info': {'name': 'python', 'version': '3.8.0'}},
+ 'nbformat': 4,
+ 'nbformat_minor': 4
+}
+nb['cells'].append({'cell_type': 'markdown', 'metadata': {}, 'source': ['# Week 2: Mini Semantic Search Lab\n', '\n', 'This notebook implements a complete semantic search pipeline for FAQs.']})
+nb['cells'].append({'cell_type': 'markdown', 'metadata': {}, 'source': ['## 1. Setup and Imports']})
+src1 = ["import sys\n", "import os\n", "sys.path.append(os.path.abspath('..'))\n\n", "import pandas as pd\n", "import numpy as np\n", "from src.cleaning import load_raw_data, handle_missing_values, remove_duplicates, normalize_text_case_whitespace, convert_to_appropriate_dtypes, detect_handle_outliers\n", "from src.numpy_stats import compute_text_length_stats\n", "from src.semantic_search import MiniSemanticSearch\n"]
+nb['cells'].append({'cell_type': 'code', 'metadata': {}, 'execution_count': None, 'outputs': [], 'source': src1})
+nb['cells'].append({'cell_type': 'markdown', 'metadata': {}, 'source': ['## 2. Load Raw Dataset']})
+src2 = ["raw_df = load_raw_data('../data/raw_faq.csv')\n", "print('Raw dataset shape:', raw_df.shape)\n", "raw_df\n"]
+nb['cells'].append({'cell_type': 'code', 'metadata': {}, 'execution_count': None, 'outputs': [], 'source': src2})
+nb['cells'].append({'cell_type': 'markdown', 'metadata': {}, 'source': ['## 3. Data Cleaning (5 Functions)']})
+src3 = ["print('=== Before Cleaning ===')\n", "print('Shape:', raw_df.shape)\n", "print(raw_df)\n\n", "df1 = handle_missing_values(raw_df)\n", "print('\\n=== After handling missing values ===')\n", "print('Shape:', df1.shape)\n\n", "df2 = remove_duplicates(df1)\n", "print('\\n=== After removing duplicates ===')\n", "print('Shape:', df2.shape)\n\n", "df3 = normalize_text_case_whitespace(df2)\n", "print('\\n=== After normalizing text case and whitespace ===')\n", "print(df3[['question', 'answer']])\n\n", "df4 = convert_to_appropriate_dtypes(df3)\n", "print('\\n=== After converting dtypes ===')\n", "print(df4.dtypes)\n\n", "df_clean = detect_handle_outliers(df4)\n", "print('\\n=== After outlier detection/handling ===')\n", "print('Shape:', df_clean.shape)\n", "print(df_clean[['question', 'answer']])\n"]
+nb['cells'].append({'cell_type': 'code', 'metadata': {}, 'execution_count': None, 'outputs': [], 'source': src3})
+nb['cells'].append({'cell_type': 'markdown', 'metadata': {}, 'source': ['## 4. NumPy Calculations (Statistical Analysis)']})
+src4 = ["q_stats, q_lengths = compute_text_length_stats(df_clean, text_col='question')\n", "print('=== Question Text Length Statistics (NumPy) ===')\n", "for k, v in q_stats.items():\n", "    print(k + ': ' + str(v))\n\n", "a_stats, a_lengths = compute_text_length_stats(df_clean, text_col='answer')\n", "print('\\n=== Answer Text Length Statistics (NumPy) ===')\n", "for k, v in a_stats.items():\n", "    print(k + ': ' + str(v))\n\n", "print('\\n=== Additional NumPy Calculations ===')\n", "print('Mean of question lengths:', np.mean(q_lengths))\n", "print('Median of question lengths:', np.median(q_lengths))\n", "print('Standard deviation:', np.std(q_lengths, ddof=1))\n", "print('90th percentile:', np.percentile(q_lengths, 90))\n", "print('Variance:', np.var(q_lengths, ddof=1))\n", "print('Sum of all question chars:', np.sum(q_lengths))\n"]
+nb['cells'].append({'cell_type': 'code', 'metadata': {}, 'execution_count': None, 'outputs': [], 'source': src4})
+nb['cells'].append({'cell_type': 'markdown', 'metadata': {}, 'source': ['## 5. Build Semantic Search with Embeddings and ChromaDB']})
+src5 = ["searcher = MiniSemanticSearch(persist_directory='../chroma_db')\n", "num_added = searcher.add_documents(df_clean)\n", "print('Added ' + str(num_added) + ' documents to ChromaDB collection')\n"]
+nb['cells'].append({'cell_type': 'code', 'metadata': {}, 'execution_count': None, 'outputs': [], 'source': src5})
+nb['cells'].append({'cell_type': 'markdown', 'metadata': {}, 'source': ['## 6. Example Semantic Searches (Top 3 Results)']})
+src6 = ["query1 = 'What is machine learning?'\n", "print('Query: ' + query1)\n", "print('='*60)\n", "results1 = searcher.search(query1, n_results=3)\n", "for i in range(len(results1['metadatas'][0])):\n", "    print('\\nResult ' + str(i+1) + ':')\n", "    print('Question: ' + str(results1['metadatas'][0][i]['question']))\n", "    print('Answer: ' + str(results1['metadatas'][0][i]['answer']))\n", "    print('Distance: ' + str(results1['distances'][0][i]))\n"]
+nb['cells'].append({'cell_type': 'code', 'metadata': {}, 'execution_count': None, 'outputs': [], 'source': src6})
+src7 = ["query2 = 'How do computers understand language?'\n", "print('Query: ' + query2)\n", "print('='*60)\n", "results2 = searcher.search(query2, n_results=3)\n", "for i in range(len(results2['metadatas'][0])):\n", "    print('\\nResult ' + str(i+1) + ':')\n", "    print('Question: ' + str(results2['metadatas'][0][i]['question']))\n", "    print('Answer: ' + str(results2['metadatas'][0][i]['answer']))\n", "    print('Distance: ' + str(results2['distances'][0][i]))\n"]
+nb['cells'].append({'cell_type': 'code', 'metadata': {}, 'execution_count': None, 'outputs': [], 'source': src7})
+src8 = ["query3 = 'teaching models from examples'\n", "print('Query: ' + query3)\n", "print('='*60)\n", "results3 = searcher.search(query3, n_results=3)\n", "for i in range(len(results3['metadatas'][0])):\n", "    print('\\nResult ' + str(i+1) + ':')\n", "    print('Question: ' + str(results3['metadatas'][0][i]['question']))\n", "    print('Answer: ' + str(results3['metadatas'][0][i]['answer']))\n", "    print('Distance: ' + str(results3['distances'][0][i]))\n"]
+nb['cells'].append({'cell_type': 'code', 'metadata': {}, 'execution_count': None, 'outputs': [], 'source': src8})
+path = Path(__file__).resolve().parent / 'week-02-mini-semantic-search' / 'notebooks' / 'mini_semantic_search.ipynb'
+with path.open('w', encoding='utf-8') as f:
+    json.dump(nb, f, indent=1)
+print('done')

@@ -1,0 +1,16 @@
+﻿question,answer
+What is machine learning?,"Machine learning is a field of AI that enables systems to learn from data without explicit programming."
+What is deep learning?,"Deep learning uses neural networks with many layers to learn complex patterns from large amounts of data."
+What is supervised learning?,"Supervised learning trains models on labeled data to make predictions on unseen examples."
+What is unsupervised learning?,"Unsupervised learning finds hidden patterns in unlabeled data, such as clustering or dimensionality reduction."
+What is reinforcement learning?,"Reinforcement learning trains agents to make decisions by rewarding desired actions and penalizing undesired ones."
+What are embeddings?,"Embeddings are numerical vector representations of text, images, or other data that capture semantic meaning."
+What is semantic search?,"Semantic search finds results based on meaning rather than just keyword matching."
+What is vector database?,"A vector database stores and searches high-dimensional vectors efficiently for similarity search."
+What is ChromaDB?,"ChromaDB is an open-source embedding database designed for building AI applications with vector search."
+What is cosine similarity?,"Cosine similarity measures the angle between two vectors to determine how similar they are in direction."
+What is NLP?,""
+,Empty question test
+What is NLP?,"Natural Language Processing is a branch of AI that helps computers understand human language."
+WHAT IS TRANSFER LEARNING?,"TRANSFER LEARNING USES A PRE-TRAINED MODEL ON A NEW TASK WITH LESS DATA."
+   What is overfitting?   ,"   Overfitting occurs when a model learns training data too well and fails to generalize.   "
